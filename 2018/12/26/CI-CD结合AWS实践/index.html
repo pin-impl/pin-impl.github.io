@@ -94,17 +94,17 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="@TOC  此篇主要是介绍一种结合AWS实现的能达到一定敏捷和安全诉求的CI/CD方案。  Jenkins 首先需要在内网（云内网或公司内网）配置一台jenkins服务器，这不是本文介绍的重点，如果不会可以Google 给应用配置task，例如Java应用，通过Jenkins编译打包完之后，把jar包放在AWS s3的bucket中。AWS服务器设置 在应用服务器上设置一些tags，比如jar：o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://withyoou.github.io/2019/07/26/hello-world/index.html">
+<meta property="og:title" content="CI&#x2F;CD结合AWS实践">
+<meta property="og:url" content="http://withyoou.github.io/2018/12/26/CI-CD结合AWS实践/index.html">
 <meta property="og:site_name" content="implements.tech">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="@TOC  此篇主要是介绍一种结合AWS实现的能达到一定敏捷和安全诉求的CI/CD方案。  Jenkins 首先需要在内网（云内网或公司内网）配置一台jenkins服务器，这不是本文介绍的重点，如果不会可以Google 给应用配置task，例如Java应用，通过Jenkins编译打包完之后，把jar包放在AWS s3的bucket中。AWS服务器设置 在应用服务器上设置一些tags，比如jar：o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T07:42:10.881Z">
+<meta property="og:updated_time" content="2019-07-26T09:20:37.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="CI&#x2F;CD结合AWS实践">
+<meta name="twitter:description" content="@TOC  此篇主要是介绍一种结合AWS实现的能达到一定敏捷和安全诉求的CI/CD方案。  Jenkins 首先需要在内网（云内网或公司内网）配置一台jenkins服务器，这不是本文介绍的重点，如果不会可以Google 给应用配置task，例如Java应用，通过Jenkins编译打包完之后，把jar包放在AWS s3的bucket中。AWS服务器设置 在应用服务器上设置一些tags，比如jar：o">
 
 
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://withyoou.github.io/2019/07/26/hello-world/">
+  <link rel="canonical" href="http://withyoou.github.io/2018/12/26/CI-CD结合AWS实践/">
 
 
 
@@ -123,7 +123,7 @@
 </script>
 
   
-  <title>Hello World | implements.tech</title>
+  <title>CI/CD结合AWS实践 | implements.tech</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2019/07/26/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2018/12/26/CI-CD结合AWS实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeremy Zhao">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">CI/CD结合AWS实践
 
               
             
@@ -323,10 +323,24 @@
                 
               
 
-              <time title="Created: 2019-07-26 15:42:10" itemprop="dateCreated datePublished" datetime="2019-07-26T15:42:10+08:00">2019-07-26</time>
+              <time title="Created: 2018-12-26 17:20:06" itemprop="dateCreated datePublished" datetime="2018-12-26T17:20:06+08:00">2018-12-26</time>
             </span>
           
 
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 17:20:37" itemprop="dateModified" datetime="2019-07-26T17:20:37+08:00">2019-07-26</time>
+              </span>
+            
           
 
           
@@ -358,19 +372,22 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>@<a href="概览">TOC</a></p>
+<blockquote>
+<p>此篇主要是介绍一种结合AWS实现的能达到一定敏捷和安全诉求的CI/CD方案。</p>
+</blockquote>
+<h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><ol>
+<li>首先需要在内网（云内网或公司内网）配置一台jenkins服务器，这不是本文介绍的重点，如果不会可以Google</li>
+<li>给应用配置task，例如Java应用，通过Jenkins编译打包完之后，把jar包放在AWS s3的bucket中。<h1 id="AWS服务器设置"><a href="#AWS服务器设置" class="headerlink" title="AWS服务器设置"></a>AWS服务器设置</h1></li>
+<li>在应用服务器上设置一些tags，比如jar：order、version：1.22.0等，如下图：<pre><code>![tags](https://img-blog.csdnimg.cn/20190716153337812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMwNjE2OTA=,size_16,color_FFFFFF,t_70)</code></pre></li>
+<li>服务器需要配置AWS IAM Role，例如：qa-service，这个Role需要有s3的可读权限，在服务器上配置如下脚本：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">APP=$2</span><br><span class="line"></span><br><span class="line">instanceInfo=$(ec2-metadata | grep 'instance-id')</span><br><span class="line">eccTag=($&#123;instanceInfo&#125;)</span><br><span class="line">instanceId=$&#123;eccTag[1]&#125;</span><br><span class="line">echo "this instance id: $&#123;instanceId&#125;"</span><br><span class="line"></span><br><span class="line">update()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">   #</span># 根据ec2的tag【version】获取jar包version</span><br><span class="line">   version="$(aws ec2 describe-tags --region cn-northwest-1 --filters "Name=resource-id,Values=$&#123;instanceId&#125;" "Name=key,Values=version" | jq '.Tags[0].Value' | sed 's/"//g')"</span><br><span class="line"><span class="meta">   #</span># 获取需要的jar名称</span><br><span class="line">   if [[ -z $&#123;APP&#125; ]]; then</span><br><span class="line">        APP="$(aws ec2 describe-tags --region cn-northwest-1 --filters "Name=resource-id,Values=$&#123;instanceId&#125;" "Name=key,Values=jar" | jq '.Tags[0].Value' | sed 's/"//g')"</span><br><span class="line">   fi</span><br><span class="line"><span class="meta">   #</span># 从s3获取jar包</span><br><span class="line">   echo "pulling jar from s3..."</span><br><span class="line">   aws s3 cp --region cn-northwest-1 s3://xxxx/qa/$&#123;APP&#125;-$&#123;version&#125;-SNAPSHOT.jar /home/xxx/$&#123;APP&#125;.jar</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restart()</span><br><span class="line">&#123;</span><br><span class="line">    #切换至root用户</span><br><span class="line">    echo "restart app..."</span><br><span class="line">    sudo su - root -c "supervisorctl restart $&#123;APP&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [[ $1 == "update" ]]; then</span><br><span class="line">    update</span><br><span class="line">elif [[ $1 == "restart" ]]; then</span><br><span class="line">    restart</span><br><span class="line">elif [[ $1 == "reload" ]]; then</span><br><span class="line">    update</span><br><span class="line">    restart</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+</li>
+</ol>
+<p>jq是shell的一个json工具，可以通过<code>yum install jq</code>安装</p>
+<blockquote>
+<p> AWS s3 和IAM Role的设置可以参考AWS 文档，非常清晰。</p>
+</blockquote>
 
       
     </div>
@@ -405,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/DevOps之shell常规用法/" rel="next" title="DevOps之shell常规用法">
-                <i class="fa fa-chevron-left"></i> DevOps之shell常规用法
+              <a href="/2018/11/26/构建基于aws的标准网络架构/" rel="next" title="构建基于aws的标准网络架构">
+                <i class="fa fa-chevron-left"></i> 构建基于aws的标准网络架构
               </a>
             
           </div>
@@ -414,6 +431,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/DevOps之shell常规用法/" rel="prev" title="DevOps之shell常规用法">
+                DevOps之shell常规用法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -520,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins"><span class="nav-number">1.</span> <span class="nav-text">Jenkins</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AWS服务器设置"><span class="nav-number">2.</span> <span class="nav-text">AWS服务器设置</span></a></li></ol></div>
             
 
           </div>

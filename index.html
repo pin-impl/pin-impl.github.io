@@ -427,6 +427,369 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2019/02/26/DevOps之shell常规用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeremy Zhao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="implements.tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/26/DevOps之shell常规用法/" class="post-title-link" itemprop="url">DevOps之shell常规用法</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-26 17:20:56" itemprop="dateCreated datePublished" datetime="2019-02-26T17:20:56+08:00">2019-02-26</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 17:21:22" itemprop="dateModified" datetime="2019-07-26T17:21:22+08:00">2019-07-26</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>作为一个新世纪的程序员，尤其是后端程序员，经常会接触到Linux服务器。并做一些发布、部署、运维、问题排查等工作，这个时候就会用到shell命令。<br>但今天讲的主要是主要是devops相关的shell脚本文件的编写。</p>
+</blockquote>
+<p>先放一个简单的demo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">DEVSTACK="$(pwd)"</span><br><span class="line"></span><br><span class="line">if [[ -z "$&#123;DEVSTACK_WORKSPACE&#125;" ]]; then</span><br><span class="line">    echo "set workspace dir to default"</span><br><span class="line">    cd ..</span><br><span class="line">    DEVSTACK_WORKSPACE="$(pwd)"</span><br><span class="line">else</span><br><span class="line">    cd $&#123;DEVSTACK_WORKSPACE&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span># include conf file</span><br><span class="line">source $&#123;DEVSTACK&#125;/common-conf.sh</span><br><span class="line"></span><br><span class="line">code_dir=$2</span><br><span class="line"></span><br><span class="line">app=$3</span><br><span class="line"></span><br><span class="line">app_path=$app</span><br><span class="line"></span><br><span class="line">if [[ -n "$&#123;serverName[$app]&#125;" ]]; then</span><br><span class="line">	app_path=$&#123;serverName[$app]&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">clone()</span><br><span class="line">&#123;</span><br><span class="line">	repo=$&#123;dRepo[$code_dir]&#125;</span><br><span class="line">	echo "clone from repo: $repo ..."</span><br><span class="line">	rm -rf $&#123;code_dir&#125;</span><br><span class="line">	git clone --single-branch -b develop -c core.symlinks=true $&#123;repo&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">build()</span><br><span class="line">&#123;</span><br><span class="line">	cd $&#123;code_dir&#125;</span><br><span class="line">	if [[ -a "pom.xml" ]]; then</span><br><span class="line">		mvn clean install</span><br><span class="line">	fi</span><br><span class="line">	cd $&#123;app_path&#125;</span><br><span class="line">	mvn package spring-boot:repackage</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logconfig()</span><br><span class="line">&#123;</span><br><span class="line">	cp -r $&#123;DEVSTACK&#125;/common-config/* $&#123;DEVSTACK_WORKSPACE&#125;/$&#123;code_dir&#125;/$&#123;app_path&#125;/src/main/resources/</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">package()</span><br><span class="line">&#123;</span><br><span class="line">	clone</span><br><span class="line">	logconfig</span><br><span class="line">	build</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">deploy()</span><br><span class="line">&#123;</span><br><span class="line">	remote=$&#123;remoteHost[$app]&#125;</span><br><span class="line">	if [[ -z $&#123;remote&#125; ]]; then</span><br><span class="line">		echo "need param host ip but is blank ..."</span><br><span class="line">		exit 1</span><br><span class="line">	fi</span><br><span class="line">	ips=($&#123;remote&#125;)</span><br><span class="line">	for ip in "$&#123;ips[@]&#125;"; do</span><br><span class="line">		echo "deploy $app to host $ip ..."</span><br><span class="line">		ssh digital@$&#123;ip&#125; 'mkdir /home/digital/app' || true</span><br><span class="line">		scp $&#123;code_dir&#125;/$&#123;app_path&#125;/target/*.jar digital@$&#123;ip&#125;:/home/digital/app/app.jar</span><br><span class="line">		ssh digital@$&#123;ip&#125; 'bash -s' &lt; $&#123;DEVSTACK&#125;/publish/start.sh restart app prod</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [[ $1 == "package" ]]; then</span><br><span class="line">	package</span><br><span class="line">elif [[ $1 == "deploy" ]]; then</span><br><span class="line">	deploy</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>这是一个自动打包发布的脚本，当然这不重要，重要的是我们分理出一些常规的shell脚本命令。<br>比如：分支判断、循环、列表、字符串判空、判断文件存在等，下面主要讲解这些用法，这里也是做一个记录防止后面自己忘记。</p>
+<ul>
+<li><p>判断字符串为空 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[ -z $A ]]; then</span><br><span class="line">	...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断字符串不为空 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[ -n $A ]]; then</span><br><span class="line">	...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断文件存在</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[ -d $file ]]; then</span><br><span class="line">	...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组，()可以将空格分割的字符串转为数组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A="a b c"</span><br><span class="line">arr=($A)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>如果字符串不是以空格分割，比如以/分割</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span># 以/分割项目路径，在根目录执行全局编译 mvn clean install</span><br><span class="line">	OLD_IFS="$IFS"</span><br><span class="line">	IFS="/"</span><br><span class="line">	arr=($&#123;name&#125;)</span><br><span class="line">	IFS="$OLD_IFS"</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>循环<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in "$&#123;!arr[@]&#125;"; do</span><br><span class="line">		...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>以上是shell常用的基本命令,还有一些很常用的技巧或者工作：</p>
+</blockquote>
+<ul>
+<li>有时候执行批命令行，不想因为某个错误（例如文件已存在）导致shell执行中断，可以这样：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">do something may be exception... || true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>shell在处理复杂的跟外界交互的命令时可能会接收到格式化的字符串返回值，例如json。</p>
+</blockquote>
+<p>shell自身不能很优雅的处理json。并且shell也没有数据类型，这也是它不能称之为语言的原因之一。但我们可以借助一些工具，让其具有处理json的能力，<strong>可以安装jq</strong>，在centos下<em>yum install jq</em>即可，demo：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version="$(aws ec2 describe-tags --region cn-northwest-1 --filters "Name=resource-id,Values=$&#123;instanceId&#125;" "Name=key,Values=version" | jq '.Tags[0].Value' | sed 's/"//g')"</span><br></pre></td></tr></table></figure>
+
+<p>这个例子是调用aws cli获取ec2本身的tag，但其为json格式，我们用jq就可以方便的取出对应的value。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2018/12/26/CI-CD结合AWS实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeremy Zhao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="implements.tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/26/CI-CD结合AWS实践/" class="post-title-link" itemprop="url">CI/CD结合AWS实践</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-26 17:20:06" itemprop="dateCreated datePublished" datetime="2018-12-26T17:20:06+08:00">2018-12-26</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 17:20:37" itemprop="dateModified" datetime="2019-07-26T17:20:37+08:00">2019-07-26</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@<a href="概览">TOC</a></p>
+<blockquote>
+<p>此篇主要是介绍一种结合AWS实现的能达到一定敏捷和安全诉求的CI/CD方案。</p>
+</blockquote>
+<h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><ol>
+<li>首先需要在内网（云内网或公司内网）配置一台jenkins服务器，这不是本文介绍的重点，如果不会可以Google</li>
+<li>给应用配置task，例如Java应用，通过Jenkins编译打包完之后，把jar包放在AWS s3的bucket中。<h1 id="AWS服务器设置"><a href="#AWS服务器设置" class="headerlink" title="AWS服务器设置"></a>AWS服务器设置</h1></li>
+<li>在应用服务器上设置一些tags，比如jar：order、version：1.22.0等，如下图：<pre><code>![tags](https://img-blog.csdnimg.cn/20190716153337812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMwNjE2OTA=,size_16,color_FFFFFF,t_70)</code></pre></li>
+<li>服务器需要配置AWS IAM Role，例如：qa-service，这个Role需要有s3的可读权限，在服务器上配置如下脚本：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">APP=$2</span><br><span class="line"></span><br><span class="line">instanceInfo=$(ec2-metadata | grep 'instance-id')</span><br><span class="line">eccTag=($&#123;instanceInfo&#125;)</span><br><span class="line">instanceId=$&#123;eccTag[1]&#125;</span><br><span class="line">echo "this instance id: $&#123;instanceId&#125;"</span><br><span class="line"></span><br><span class="line">update()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">   #</span># 根据ec2的tag【version】获取jar包version</span><br><span class="line">   version="$(aws ec2 describe-tags --region cn-northwest-1 --filters "Name=resource-id,Values=$&#123;instanceId&#125;" "Name=key,Values=version" | jq '.Tags[0].Value' | sed 's/"//g')"</span><br><span class="line"><span class="meta">   #</span># 获取需要的jar名称</span><br><span class="line">   if [[ -z $&#123;APP&#125; ]]; then</span><br><span class="line">        APP="$(aws ec2 describe-tags --region cn-northwest-1 --filters "Name=resource-id,Values=$&#123;instanceId&#125;" "Name=key,Values=jar" | jq '.Tags[0].Value' | sed 's/"//g')"</span><br><span class="line">   fi</span><br><span class="line"><span class="meta">   #</span># 从s3获取jar包</span><br><span class="line">   echo "pulling jar from s3..."</span><br><span class="line">   aws s3 cp --region cn-northwest-1 s3://xxxx/qa/$&#123;APP&#125;-$&#123;version&#125;-SNAPSHOT.jar /home/xxx/$&#123;APP&#125;.jar</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restart()</span><br><span class="line">&#123;</span><br><span class="line">    #切换至root用户</span><br><span class="line">    echo "restart app..."</span><br><span class="line">    sudo su - root -c "supervisorctl restart $&#123;APP&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [[ $1 == "update" ]]; then</span><br><span class="line">    update</span><br><span class="line">elif [[ $1 == "restart" ]]; then</span><br><span class="line">    restart</span><br><span class="line">elif [[ $1 == "reload" ]]; then</span><br><span class="line">    update</span><br><span class="line">    restart</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>jq是shell的一个json工具，可以通过<code>yum install jq</code>安装</p>
+<blockquote>
+<p> AWS s3 和IAM Role的设置可以参考AWS 文档，非常清晰。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2018/11/26/构建基于aws的标准网络架构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -754,6 +1117,185 @@
   </article>
 
     
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2018/06/16/在centos7上为应用添加进程守护supervisor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeremy Zhao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="implements.tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/06/16/在centos7上为应用添加进程守护supervisor/" class="post-title-link" itemprop="url">在centos7上为应用添加进程守护supervisor</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-16 17:18:50" itemprop="dateCreated datePublished" datetime="2018-06-16T17:18:50+08:00">2018-06-16</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 17:19:27" itemprop="dateModified" datetime="2019-07-26T17:19:27+08:00">2019-07-26</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@<a href="目录">TOC</a></p>
+<blockquote>
+<p>本文主要记录在centos7上为应用添加进程守护程序，防止因系统重启或应用意外退出导致程序不再运行。</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/perfecttech/article/details/79815147" target="_blank" rel="noopener">在centos6上安装使用supervisor</a></p>
+<h1 id="安装守护程序supervisord"><a href="#安装守护程序supervisord" class="headerlink" title="安装守护程序supervisord"></a>安装守护程序supervisord</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools</span><br><span class="line">easy_install supervisor</span><br><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>把内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[include] </span><br><span class="line"> files = /usr/local/share/supervisor/*.conf</span><br></pre></td></tr></table></figure>
+
+<p>加入<code>/etc/supervisord.conf</code>内。</p>
+<h1 id="添加守护程序"><a href="#添加守护程序" class="headerlink" title="添加守护程序"></a>添加守护程序</h1><p>在<code>/usr/local/share/supervisor/</code>目录下添加<code>demo.conf</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[program:demo]</span><br><span class="line">command=/usr/bin/java -server -jar /home/xxx/xxx.jar</span><br><span class="line">user=root</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">startsecs=3</span><br><span class="line">stdout_logfile=/usr/local/share/supervisor/demo.log</span><br></pre></td></tr></table></figure>
+
+<h1 id="设置supervisor开机启动"><a href="#设置supervisor开机启动" class="headerlink" title="设置supervisor开机启动"></a>设置supervisor开机启动</h1><p>进入目录<code>/usr/lib/systemd/system/</code>新增文件<code>supervisord.service</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Supervisor daemon</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/bin/supervisord -c /etc/supervisord.conf</span><br><span class="line">ExecStop=/usr/bin/supervisorctl shutdown</span><br><span class="line">ExecReload=/usr/bin/supervisorctl reload</span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=42s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>systemctl enable supervisord.service</code></p>
+<h1 id="控制进程守护"><a href="#控制进程守护" class="headerlink" title="控制进程守护"></a>控制进程守护</h1><ol>
+<li>启动supervisor进程<code>systemctl start supervisord.service</code>，会启动所有被守护的应用（在<code>/usr/local/share/supervisor/</code>配置过的）</li>
+<li>停止进程守护<code>systemctl stop supervisord.service</code>，会停止所有被守护的应用</li>
+<li>重载变化的配置<code>systemctl reload supervisord.service</code>，当<code>/etc/supervisord.conf</code>变化时执行</li>
+</ol>
+<h1 id="控制被守护的应用"><a href="#控制被守护的应用" class="headerlink" title="控制被守护的应用"></a>控制被守护的应用</h1><ol>
+<li>查看所有应用<code>supervisorctl status</code></li>
+<li>stop某个应用<code>supervisorctl stop xxx</code>， xxx为上一步现实的应用名即<code>[program:demo]</code>这里是demo</li>
+<li>restart某个应用<code>supervisorctl restart xxx</code></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
   </section>
 
   
@@ -797,7 +1339,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

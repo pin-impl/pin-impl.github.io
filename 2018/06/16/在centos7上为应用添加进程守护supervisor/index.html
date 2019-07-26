@@ -94,17 +94,17 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="@TOC  本文主要记录在centos7上为应用添加进程守护程序，防止因系统重启或应用意外退出导致程序不再运行。  在centos6上安装使用supervisor 安装守护程序supervisord123yum install python-setuptoolseasy_install supervisorecho_supervisord_conf &amp;gt; /etc/supervisord.co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://withyoou.github.io/2019/07/26/hello-world/index.html">
+<meta property="og:title" content="在centos7上为应用添加进程守护supervisor">
+<meta property="og:url" content="http://withyoou.github.io/2018/06/16/在centos7上为应用添加进程守护supervisor/index.html">
 <meta property="og:site_name" content="implements.tech">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="@TOC  本文主要记录在centos7上为应用添加进程守护程序，防止因系统重启或应用意外退出导致程序不再运行。  在centos6上安装使用supervisor 安装守护程序supervisord123yum install python-setuptoolseasy_install supervisorecho_supervisord_conf &amp;gt; /etc/supervisord.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T07:42:10.881Z">
+<meta property="og:updated_time" content="2019-07-26T09:19:27.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="在centos7上为应用添加进程守护supervisor">
+<meta name="twitter:description" content="@TOC  本文主要记录在centos7上为应用添加进程守护程序，防止因系统重启或应用意外退出导致程序不再运行。  在centos6上安装使用supervisor 安装守护程序supervisord123yum install python-setuptoolseasy_install supervisorecho_supervisord_conf &amp;gt; /etc/supervisord.co">
 
 
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://withyoou.github.io/2019/07/26/hello-world/">
+  <link rel="canonical" href="http://withyoou.github.io/2018/06/16/在centos7上为应用添加进程守护supervisor/">
 
 
 
@@ -123,7 +123,7 @@
 </script>
 
   
-  <title>Hello World | implements.tech</title>
+  <title>在centos7上为应用添加进程守护supervisor | implements.tech</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2019/07/26/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://withyoou.github.io/2018/06/16/在centos7上为应用添加进程守护supervisor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeremy Zhao">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">在centos7上为应用添加进程守护supervisor
 
               
             
@@ -323,10 +323,24 @@
                 
               
 
-              <time title="Created: 2019-07-26 15:42:10" itemprop="dateCreated datePublished" datetime="2019-07-26T15:42:10+08:00">2019-07-26</time>
+              <time title="Created: 2018-06-16 17:18:50" itemprop="dateCreated datePublished" datetime="2018-06-16T17:18:50+08:00">2018-06-16</time>
             </span>
           
 
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 17:19:27" itemprop="dateModified" datetime="2019-07-26T17:19:27+08:00">2019-07-26</time>
+              </span>
+            
           
 
           
@@ -358,19 +372,34 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>@<a href="目录">TOC</a></p>
+<blockquote>
+<p>本文主要记录在centos7上为应用添加进程守护程序，防止因系统重启或应用意外退出导致程序不再运行。</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/perfecttech/article/details/79815147" target="_blank" rel="noopener">在centos6上安装使用supervisor</a></p>
+<h1 id="安装守护程序supervisord"><a href="#安装守护程序supervisord" class="headerlink" title="安装守护程序supervisord"></a>安装守护程序supervisord</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools</span><br><span class="line">easy_install supervisor</span><br><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>把内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[include] </span><br><span class="line"> files = /usr/local/share/supervisor/*.conf</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>加入<code>/etc/supervisord.conf</code>内。</p>
+<h1 id="添加守护程序"><a href="#添加守护程序" class="headerlink" title="添加守护程序"></a>添加守护程序</h1><p>在<code>/usr/local/share/supervisor/</code>目录下添加<code>demo.conf</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[program:demo]</span><br><span class="line">command=/usr/bin/java -server -jar /home/xxx/xxx.jar</span><br><span class="line">user=root</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">startsecs=3</span><br><span class="line">stdout_logfile=/usr/local/share/supervisor/demo.log</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h1 id="设置supervisor开机启动"><a href="#设置supervisor开机启动" class="headerlink" title="设置supervisor开机启动"></a>设置supervisor开机启动</h1><p>进入目录<code>/usr/lib/systemd/system/</code>新增文件<code>supervisord.service</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Supervisor daemon</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/bin/supervisord -c /etc/supervisord.conf</span><br><span class="line">ExecStop=/usr/bin/supervisorctl shutdown</span><br><span class="line">ExecReload=/usr/bin/supervisorctl reload</span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=42s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>执行<code>systemctl enable supervisord.service</code></p>
+<h1 id="控制进程守护"><a href="#控制进程守护" class="headerlink" title="控制进程守护"></a>控制进程守护</h1><ol>
+<li>启动supervisor进程<code>systemctl start supervisord.service</code>，会启动所有被守护的应用（在<code>/usr/local/share/supervisor/</code>配置过的）</li>
+<li>停止进程守护<code>systemctl stop supervisord.service</code>，会停止所有被守护的应用</li>
+<li>重载变化的配置<code>systemctl reload supervisord.service</code>，当<code>/etc/supervisord.conf</code>变化时执行</li>
+</ol>
+<h1 id="控制被守护的应用"><a href="#控制被守护的应用" class="headerlink" title="控制被守护的应用"></a>控制被守护的应用</h1><ol>
+<li>查看所有应用<code>supervisorctl status</code></li>
+<li>stop某个应用<code>supervisorctl stop xxx</code>， xxx为上一步现实的应用名即<code>[program:demo]</code>这里是demo</li>
+<li>restart某个应用<code>supervisorctl restart xxx</code></li>
+</ol>
 
       
     </div>
@@ -405,15 +434,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/DevOps之shell常规用法/" rel="next" title="DevOps之shell常规用法">
-                <i class="fa fa-chevron-left"></i> DevOps之shell常规用法
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/26/Mac下安装使用jdk版本管理工具jenv/" rel="prev" title="Mac下安装使用jdk版本管理工具jenv">
+                Mac下安装使用jdk版本管理工具jenv <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -520,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装守护程序supervisord"><span class="nav-number">1.</span> <span class="nav-text">安装守护程序supervisord</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改配置文件"><span class="nav-number">2.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加守护程序"><span class="nav-number">3.</span> <span class="nav-text">添加守护程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置supervisor开机启动"><span class="nav-number">4.</span> <span class="nav-text">设置supervisor开机启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制进程守护"><span class="nav-number">5.</span> <span class="nav-text">控制进程守护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制被守护的应用"><span class="nav-number">6.</span> <span class="nav-text">控制被守护的应用</span></a></li></ol></div>
             
 
           </div>
